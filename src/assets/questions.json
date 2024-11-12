@@ -1,0 +1,44 @@
+[
+  {
+    "text": "Your company would like to understand what fields are masked in the Einstein Trust Layer and potentially mask some additional fields that contain sensitive data. What is true in this scenario?",
+    "alternatives": [
+      {
+        "text": "Data masking is done automatically and it is not possible to mask additional fields",
+        "isCorrect": false
+      },
+      { "text": "All data maskling must be done manually", "isCorrect": false },
+      {
+        "text": "Supported entries can be masked via Configure Data Masking",
+        "isCorrect": true
+      }
+    ]
+  },
+  {
+    "text": "Which feature of the Einstein Trust Layer safeguards personally identifiable information (PII) before it is seen by the AI model?",
+    "alternatives": [
+      {
+        "text": "Data Masking",
+        "isCorrect": true
+      },
+      { "text": "Secure Data Retrieval", "isCorrect": false },
+      {
+        "text": "Prompt Defense",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "text": "How does Einstein Trust Layer help prevenmt harmful data leaks?",
+    "alternatives": [
+      {
+        "text": "By storing data securely for future use",
+        "isCorrect": false
+      },
+      { "text": "By ensuring a Zero Data Retention Policy", "isCorrect": true },
+      {
+        "text": "By shariung data across platforms",
+        "isCorrect": false
+      }
+    ]
+  }
+]
