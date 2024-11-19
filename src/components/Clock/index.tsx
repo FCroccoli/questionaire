@@ -1,27 +1,9 @@
-import { useContext, useEffect, useState } from "react";
-import { QuestionsContext } from "../../contexts/questionsContext";
+import { useContext } from "react";
 import { ClockWrapper } from "./style";
+import { QuestionsContext } from "../../contexts/questionsContext";
 
 export default function Clock() {
-  //const { clockTimer } = useContext(QuestionsContext);
-  const [clockTimer, setClockTimer] = useState("");
-  let totalSeconds = 0;
-
-  useEffect(() => {
-    setInterval(() => {
-      const hours = Math.floor(
-        (totalSeconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-      );
-      const minutes = Math.floor(
-        (totalSeconds % (1000 * 60 * 60)) / (1000 * 60)
-      );
-      const seconds = Math.floor((totalSeconds % (1000 * 60)) / 1000);
-
-      setClockTimer(`${hours}:${minutes}:${seconds}`);
-
-      totalSeconds++;
-    }, 1000);
-  }, []);
+  const { clockTimer } = useContext(QuestionsContext);
 
   return (
     <ClockWrapper>

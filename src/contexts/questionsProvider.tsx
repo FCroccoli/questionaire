@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { iAnswer, iQuestion } from "../interfaces";
 import questions from "../assets/questions.json";
 import { QuestionsContext } from "./questionsContext";
@@ -21,6 +21,7 @@ export interface iQuestionsContext {
   scoreRequired: number;
   endTest: () => void;
   clockTimer: string;
+  totalSeconds: number;
 }
 
 export default function QuestionsProvider({ children }: iContextProps) {
@@ -30,9 +31,9 @@ export default function QuestionsProvider({ children }: iContextProps) {
   const [hasPrevQuestion, setHasPrevQuestion] = useState<boolean>(false);
   const [scoreRequired, setScoreRequired] = useState<number>(0);
   const [answers, setAnswers] = useState<iAnswer[]>([]);
-  let totalSeconds: number;
-  const [clockTimer, setClockTimer] = useState("");
-  let timer: number;
+  let totalSeconds: number = 0;
+  const [clockTimer, setClockTimer] = useState("00:00:00");
+  const timer = useRef<number | undefined>();
 
   function shuffle(inputArray: iQuestion[]) {
     const array = [...inputArray];
@@ -54,18 +55,26 @@ export default function QuestionsProvider({ children }: iContextProps) {
   }
 
   const timeCounter = () => {
-    const hours = Math.floor(
-      (totalSeconds % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
-    );
-    const minutes = Math.floor((totalSeconds % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((totalSeconds % (1000 * 60)) / 1000);
+    totalSeconds++;
+
+    const hours = Math.floor((totalSeconds / (60 * 60)) % 24)
+      .toString()
+      .padStart(2, "0");
+    const minutes = Math.floor((totalSeconds / 60) % 60)
+      .toString()
+      .padStart(2, "0");
+    const seconds = Math.floor(totalSeconds % 60)
+      .toString()
+      .padStart(2, "0");
 
     setClockTimer(`${hours}:${minutes}:${seconds}`);
-
-    totalSeconds++;
   };
 
   const startTest = (questionsAmmount: number, scoreRequired: number) => {
+    setClockTimer(`00:00:00`);
+    setSelectedQuestion(0);
+    totalSeconds = 0;
+    timer.current = setInterval(timeCounter, 1000);
     setScoreRequired(scoreRequired);
     setQuestionsList(shuffle(questions).slice(0, questionsAmmount));
     setAnswers(
@@ -74,13 +83,11 @@ export default function QuestionsProvider({ children }: iContextProps) {
         isCorrect: false,
       })
     );
-    setSelectedQuestion(0);
-    totalSeconds = 0;
-    timer = setInterval(timeCounter, 1000);
   };
 
   const endTest = () => {
-    clearInterval(timer);
+    clearInterval(timer.current);
+    console.log(clockTimer);
   };
 
   useEffect(() => {
@@ -117,6 +124,7 @@ export default function QuestionsProvider({ children }: iContextProps) {
         scoreRequired,
         endTest,
         clockTimer,
+        totalSeconds,
       }}
     >
       {children}

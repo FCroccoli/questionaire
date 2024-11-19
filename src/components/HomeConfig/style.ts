@@ -7,6 +7,7 @@ export const ConfigDisplay = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 6px;
+  padding-top: 16px;
 `;
 
 export const NavButton = styled.button`

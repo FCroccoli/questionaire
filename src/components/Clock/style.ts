@@ -7,4 +7,5 @@ export const ClockWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 6px;
+  padding-top: 16px;
 `;
