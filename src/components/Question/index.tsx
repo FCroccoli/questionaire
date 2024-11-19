@@ -28,8 +28,8 @@ export default function Question({ question }: iQuestionProps) {
     setSelectedQuestion,
     hasNextQuestion,
     hasPrevQuestion,
-    pushAnswer,
     answers,
+    endTest,
   } = useContext(QuestionsContext);
 
   const [selectedAlternative, setSelectedAlternative] = useState<number>(-1);
@@ -77,6 +77,7 @@ export default function Question({ question }: iQuestionProps) {
       <ButtonsWrapper>
         <SubmitButton
           onClick={() => {
+            endTest();
             navigate("/results");
           }}
         >
@@ -85,10 +86,6 @@ export default function Question({ question }: iQuestionProps) {
         <NavButton
           $shouldDisplay={hasPrevQuestion}
           onClick={() => {
-            pushAnswer({
-              selectedAlternative: selectedAlternative,
-              isCorrect: verifyQuestion(selectedAlternative),
-            });
             setSelectedAlternative(-1);
             setDisplayResult(false);
             setIsCorrect(false);
@@ -101,10 +98,6 @@ export default function Question({ question }: iQuestionProps) {
         <NavButton
           $shouldDisplay={hasNextQuestion}
           onClick={() => {
-            pushAnswer({
-              selectedAlternative: selectedAlternative,
-              isCorrect: verifyQuestion(selectedAlternative),
-            });
             setSelectedAlternative(-1);
             setDisplayResult(false);
             setIsCorrect(false);

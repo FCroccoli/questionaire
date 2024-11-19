@@ -28,7 +28,7 @@
     ]
   },
   {
-    "text": "How does Einstein Trust Layer help prevenmt harmful data leaks?",
+    "text": "How does Einstein Trust Layer help prevent harmful data leaks?",
     "alternatives": [
       {
         "text": "By storing data securely for future use",
@@ -36,7 +36,24 @@
       },
       { "text": "By ensuring a Zero Data Retention Policy", "isCorrect": true },
       {
-        "text": "By shariung data across platforms",
+        "text": "By sharing data across platforms",
+        "isCorrect": false
+      }
+    ]
+  },
+  {
+    "text": "Why is Prompt Defence important in the Einstein Trust Layer?",
+    "alternatives": [
+      {
+        "text": "To enhance the speed of AI responses",
+        "isCorrect": false
+      },
+      {
+        "text": "To prevent harmful or biased content from being generetaed",
+        "isCorrect": true
+      },
+      {
+        "text": "To store user prompts for future analysis",
         "isCorrect": false
       }
     ]
